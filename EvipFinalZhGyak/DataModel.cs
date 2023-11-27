@@ -15,24 +15,22 @@ namespace EvipFinalZhGyak
         public string SelectedType { get; set; }
         public int Days { get; set; }
 
-        public string Summary {
+        public string Summary
+        {
             get
             {
                 return $"{Brand} típusú {SelectedType} autó, összesen {Days} napra, maximum {MaxPrice} Ft";
             }
         }
 
-        private List<Car> cars;
-        public List<Car> Cars
+        public ObservableCollection<Car> _cars;
+        public ObservableCollection<Car> Cars
         {
-            get { return cars; }
+            get => _cars;
             set
             {
-                if (cars != value)
-                {
-                    cars = value;
-                    OnPropertyChanged(nameof(Cars));
-                }
+                _cars = value;
+                OnPropertyChanged(nameof(Cars));
             }
         }
 
@@ -46,12 +44,11 @@ namespace EvipFinalZhGyak
         public DataModel()
         {
             //test car data
-            Cars = new List<Car>
+            Cars = new ObservableCollection<Car>
             {
                 new Car("Toyota", "kicsi", 2449),
                 new Car("BMW", "nagy", 1500)
             };
-            //PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Cars)));
         }
     }
 }

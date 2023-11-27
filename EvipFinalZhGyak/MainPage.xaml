@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EvipFinalZhGyak.MainPage"
              BackgroundColor="#222222"
-             x:Name="this">
+             x:Name="this"
+             xmlns:local="clr-namespace:EvipFinalZhGyak">
     <ContentPage.Resources>
         <Style TargetType="Entry">
             <Setter Property="HeightRequest" Value="25" />
@@ -54,7 +55,10 @@
                 <Button x:Name="SearchButton" Text="Keres" Grid.Column="0" Grid.Row="8" WidthRequest="100" HorizontalOptions="Start"/>
             </Grid>
 
-            <CollectionView x:Name="szar" Grid.Column="1" Grid.Row="0" BackgroundColor="Purple" ItemsSource="{Binding dataModel.Cars}">
+            <CollectionView x:Name="szar" Grid.Column="1" Grid.Row="0" BackgroundColor="Purple" ItemsSource="{Binding Cars}">
+                <!--<CollectionView.BindingContext>
+                    <local:Car />
+                </CollectionView.BindingContext>-->
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <HorizontalStackLayout>
