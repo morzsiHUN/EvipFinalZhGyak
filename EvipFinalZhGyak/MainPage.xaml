@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EvipFinalZhGyak.MainPage"
+             BackgroundColor="#222222"
+             x:Name="this">
+    <ContentPage.Resources>
+        <Style TargetType="Entry">
+            <Setter Property="HeightRequest" Value="25" />
+            <Setter Property="BackgroundColor" Value="#444444"/>
+        </Style>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <Grid Padding="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid  Grid.Column="0" Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="50"/>
+
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="50"/>
+
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="50"/>
+
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="50"/>
+
+                    <RowDefinition Height="50"/>
+
+                </Grid.RowDefinitions>
+
+                <Label Text="Márka" Grid.Column="0" Grid.Row="0" VerticalTextAlignment="End"/>
+                <Entry x:Name="BrandEntry" Grid.Column="0" Grid.Row="1"/>
+
+                <Label Text="Maximum ár" Grid.Column="0" Grid.Row="2" VerticalTextAlignment="End"/>
+                <Slider x:Name="MaxPriceSlider" Grid.Column="0" Grid.Row="3"/>
+
+                <Label Text="Fajta" Grid.Column="0" Grid.Row="4" VerticalTextAlignment="End"/>
+                <Entry x:Name="TypeEntry" Grid.Column="0" Grid.Row="5"/>
+
+                <Label Text="Napok száma" Grid.Column="0" Grid.Row="6" VerticalTextAlignment="End"/>
+                <Slider x:Name="DaysSlider" Grid.Column="0" Grid.Row="7"/>
+
+                <Button x:Name="SearchButton" Text="Keres" Grid.Column="0" Grid.Row="8" WidthRequest="100" HorizontalOptions="Start"/>
+            </Grid>
+
+            <CollectionView x:Name="szar" Grid.Column="1" Grid.Row="0" BackgroundColor="Purple" ItemsSource="{Binding dataModel.Cars}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <HorizontalStackLayout>
+                            <Label Text="{Binding Name}" />
+                        </HorizontalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </ScrollView>
+
+</ContentPage>
