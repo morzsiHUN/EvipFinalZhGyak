@@ -15,5 +15,11 @@ namespace EvipFinalZhGyak
             dataModel.Cars.Add(new Car("asd2", "asd2", 212));
 
         }
+
+        private void SearchButton_Clicked(object sender, EventArgs e)
+        {
+            //SummaryLabel.Text = dataModel.Summary;
+            //dataModel.Search();
+        }
     }
 }

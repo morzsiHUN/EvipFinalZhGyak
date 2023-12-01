@@ -10,10 +10,42 @@ namespace EvipFinalZhGyak
 {
     public class DataModel : INotifyPropertyChanged
     {
-        public string Brand { get; set; }
-        public int MaxPrice { get; set; }
-        public string SelectedType { get; set; }
-        public int Days { get; set; }
+        private string _brand;
+        public string Brand
+        {
+            get { return _brand; }
+            set
+            {
+                SetPropertyValue(ref _brand, value, nameof(Brand));
+            }
+        }
+        private int _maxPrice;
+        public int MaxPrice
+        {
+            get { return _maxPrice; }
+            set
+            {
+                SetPropertyValue(ref _maxPrice, value, nameof(MaxPrice));
+            }
+        }
+        private string _selectedType;
+        public string SelectedType
+        {
+            get { return _selectedType; }
+            set
+            {
+                SetPropertyValue(ref _selectedType, value, nameof(SelectedType));
+            }
+        }
+        private int _days;
+        public int Days
+        {
+            get { return _days; }
+            set
+            {
+                SetPropertyValue(ref _days, value, nameof(Days));
+            }
+        }
 
         public string Summary
         {
@@ -36,9 +68,18 @@ namespace EvipFinalZhGyak
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        //Felhasználói felület értesítése a változásról --> frissítés
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        //Kód ismétlés elkerülése
+        protected virtual void SetPropertyValue<T>(ref T field, T value, string propertyName)
+        {
+            field = value;
+            OnPropertyChanged(propertyName);
+            OnPropertyChanged(nameof(Summary));
         }
 
         public DataModel()
