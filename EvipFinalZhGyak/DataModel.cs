@@ -91,5 +91,31 @@ namespace EvipFinalZhGyak
                 new Car("BMW", "nagy", 1500)
             };
         }
+
+        public async void Search()
+        { 
+            List<Car> allCar  = new List<Car>()
+            {
+                new Car("Toyota Yaris", "kicsi", 2449),
+                new Car("Volvo v60", "kombi", 9000),
+                new Car("Volvo v90", "kombi", 1000),
+                new Car("Opel Astra", "kicsi", 500),
+                new Car("Peugeot Boxer", "nagy", 7000),
+                new Car("Nissan Cube", "kicsi", 4200),
+                new Car("Ford Focus", "kicsi", 1000),
+                new Car("Wolsvagen Golf", "kicsi", 3000),
+                new Car("BMW X6", "nagy", 5000),
+            };
+
+            List<Car> filteredCars = allCar.Where(car => car.Name.Contains(Brand) && car.Type == SelectedType && car.Price <= MaxPrice).ToList();
+
+            Cars.Clear();
+
+            foreach (var car in filteredCars)
+            {
+                Cars.Add(car);
+                Task.Delay(1000).Wait();
+            }
+        }
     }
 }
