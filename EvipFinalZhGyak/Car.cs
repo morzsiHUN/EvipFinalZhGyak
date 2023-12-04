@@ -12,6 +12,14 @@ namespace EvipFinalZhGyak
         public string Type { get; set; }
         public int Price { get; set; }
 
+        public string Description
+        {
+            get
+            {
+                return $"{Name}, {Price} Ft/nap ({Type})";
+            }
+        }
+
         public Car(string name, string type, int price)
         {
             Name = name;
