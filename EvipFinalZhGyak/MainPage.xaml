@@ -57,7 +57,7 @@
                 <Slider x:Name="DaysSlider" Value="{Binding Days, Mode=TwoWay}" Minimum="0" Maximum="31" Grid.Column="0" Grid.Row="7"/>
 
                 <!--<Button x:Name="SearchButton" Text="Keres" Command="searchCommand" Grid.Column="0" Grid.Row="8" WidthRequest="100" HorizontalOptions="Start"/>-->
-                <Button x:Name="SearchButton" Text="Keres" Command="{Binding Source={x:Reference this}, Path=searchCommand}" Grid.Column="0" Grid.Row="8" WidthRequest="100" HorizontalOptions="Start"/>
+                <Button x:Name="SearchButton" Text="Keres" Command="{Binding MyCommand}" Grid.Column="0" Grid.Row="8" WidthRequest="100" HorizontalOptions="Start"/>
 
 
                 <Label x:Name="SummaryLabel" Text="{Binding Summary}" Grid.Column="0" Grid.Row="9"/>
