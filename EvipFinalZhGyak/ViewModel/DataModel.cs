@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using EvipFinalZhGyak.Model;
 
-namespace EvipFinalZhGyak
+namespace EvipFinalZhGyak.ViewModel
 {
     public class DataModel : INotifyPropertyChanged
     {
-        private string _brand;
+        private string _brand = "";
         public string Brand
         {
             get { return _brand; }
@@ -19,7 +15,7 @@ namespace EvipFinalZhGyak
                 SetPropertyValue(ref _brand, value, nameof(Brand));
             }
         }
-        private int _maxPrice;
+        private int _maxPrice = 0;
         public int MaxPrice
         {
             get { return _maxPrice; }
@@ -28,7 +24,7 @@ namespace EvipFinalZhGyak
                 SetPropertyValue(ref _maxPrice, value, nameof(MaxPrice));
             }
         }
-        private string _selectedType;
+        private string _selectedType = "";
         public string SelectedType
         {
             get { return _selectedType; }
@@ -37,7 +33,7 @@ namespace EvipFinalZhGyak
                 SetPropertyValue(ref _selectedType, value, nameof(SelectedType));
             }
         }
-        private int _days;
+        private int _days = 0;
         public int Days
         {
             get { return _days; }
@@ -68,10 +64,13 @@ namespace EvipFinalZhGyak
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+
         //Felhasználói felület értesítése a változásról --> frissítés
         protected virtual void OnPropertyChanged(string propertyName)
         {
+            System.Diagnostics.Debug.WriteLine($"PropertyChanged event raised for {propertyName}");
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            System.Diagnostics.Debug.WriteLine(PropertyChanged?.GetInvocationList().Length);
         }
 
         //Kód ismétlés elkerülése
@@ -93,8 +92,8 @@ namespace EvipFinalZhGyak
         }
 
         public async void Search()
-        { 
-            List<Car> allCar  = new List<Car>()
+        {
+            List<Car> allCar = new List<Car>()
             {
                 new Car("Toyota Yaris", "kicsi", 2449),
                 new Car("Volvo v60", "kombi", 9000),
@@ -113,8 +112,8 @@ namespace EvipFinalZhGyak
 
             foreach (var car in filteredCars)
             {
+                await Task.Delay(1000);
                 Cars.Add(car);
-                Task.Delay(1000).Wait();
             }
         }
     }

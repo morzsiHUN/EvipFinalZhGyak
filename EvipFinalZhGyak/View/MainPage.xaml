@@ -5,84 +5,80 @@
              BackgroundColor="#222222"
              x:Name="thisMain"
              Title="Evip Zárthelyi gyakorlás"
-             xmlns:local="clr-namespace:EvipFinalZhGyak">
+             xmlns:local="clr-namespace:EvipFinalZhGyak"
+             xmlns:vm="clr-namespace:EvipFinalZhGyak.ViewModel">
+    
     <ContentPage.Resources>
+        <!--Stílusok-->
         <Style TargetType="Entry">
             <Setter Property="HeightRequest" Value="25" />
             <Setter Property="BackgroundColor" Value="#444444"/>
         </Style>
+        <!--Adatok-->
+        <!--<vm:DataModel x:Key="dataModel"/>-->
     </ContentPage.Resources>
 
     <ScrollView>
-        <HorizontalStackLayout>
-            <!--<Button 
-                x:Name="SearchButton" Text="Keres" 
-                x:DataType="local:MainPage" 
-                BindingContext="{x:Reference thisMain}"
-                Command="{ Binding Path=TestCommand }" 
-                Grid.Column="0" Grid.Row="8" WidthRequest="100" HorizontalOptions="Start"/>-->
-            <Button Text="Execute Command" Command="{Binding MyCommand, Source={x:Reference thisMain}}" />
+        <Grid Padding="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-            <Grid Padding="10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
+            <Grid x:Name="LeftGrid" Grid.Column="0" Grid.Row="0" >
+                <!--<Grid.BindingContext>
+                    --><!--1. megoldás létrehoz egy saját pédányt a DataModel osztályból--><!--
+                    <vm:DataModel/>
+                </Grid.BindingContext>-->
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="50"/>
+
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="50"/>
+
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="50"/>
+
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="50"/>
+
+                    <RowDefinition Height="50"/>
+
+                    <RowDefinition Height="50"/>
                 </Grid.RowDefinitions>
 
-                <Grid  Grid.Column="0" Grid.Row="0">
-                    <Grid.BindingContext>
-                        <local:DataModel/>
-                    </Grid.BindingContext>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="20"/>
-                        <RowDefinition Height="50"/>
+                <Label Text="Márka" Grid.Column="0" Grid.Row="0" VerticalTextAlignment="End"/>
+                <Entry x:Name="BrandEntry" Text="{Binding Brand, Mode=TwoWay}" Grid.Column="0" Grid.Row="1"/>
 
-                        <RowDefinition Height="20"/>
-                        <RowDefinition Height="50"/>
+                <Label Text="Maximum ár" Grid.Column="0" Grid.Row="2" VerticalTextAlignment="End"/>
+                <Slider x:Name="MaxPriceSlider" Value="{Binding MaxPrice, Mode=TwoWay}" Minimum="500" Maximum="10000" Grid.Column="0" Grid.Row="3"/>
 
-                        <RowDefinition Height="20"/>
-                        <RowDefinition Height="50"/>
+                <Label Text="Fajta" Grid.Column="0" Grid.Row="4" VerticalTextAlignment="End"/>
+                <Entry x:Name="TypeEntry" Text="{Binding SelectedType, Mode=TwoWay}" Grid.Column="0" Grid.Row="5"/>
 
-                        <RowDefinition Height="20"/>
-                        <RowDefinition Height="50"/>
+                <Label Text="Napok száma" Grid.Column="0" Grid.Row="6" VerticalTextAlignment="End"/>
+                <Slider x:Name="DaysSlider" Value="{Binding Days, Mode=TwoWay}" Minimum="0" Maximum="31" Grid.Column="0" Grid.Row="7"/>
 
-                        <RowDefinition Height="50"/>
+                <Button x:Name="SearchButton" Text="Keres" Command="{Binding MySearchCommand, Source={x:Reference thisMain}}" Grid.Column="0" Grid.Row="8" WidthRequest="100" HorizontalOptions="Start"/>
 
-                        <RowDefinition Height="50"/>
-                    </Grid.RowDefinitions>
-
-                    <Label Text="Márka" Grid.Column="0" Grid.Row="0" VerticalTextAlignment="End"/>
-                    <Entry x:Name="BrandEntry" Text="{Binding Brand, Mode=TwoWay}" Grid.Column="0" Grid.Row="1"/>
-
-                    <Label Text="Maximum ár" Grid.Column="0" Grid.Row="2" VerticalTextAlignment="End"/>
-                    <Slider x:Name="MaxPriceSlider" Value="{Binding MaxPrice, Mode=TwoWay}" Minimum="500" Maximum="10000" Grid.Column="0" Grid.Row="3"/>
-
-                    <Label Text="Fajta" Grid.Column="0" Grid.Row="4" VerticalTextAlignment="End"/>
-                    <Entry x:Name="TypeEntry" Text="{Binding SelectedType, Mode=TwoWay}" Grid.Column="0" Grid.Row="5"/>
-
-                    <Label Text="Napok száma" Grid.Column="0" Grid.Row="6" VerticalTextAlignment="End"/>
-                    <Slider x:Name="DaysSlider" Value="{Binding Days, Mode=TwoWay}" Minimum="0" Maximum="31" Grid.Column="0" Grid.Row="7"/>
-
-                    <!--<Button x:Name="SearchButton" Text="Keres" Command="searchCommand" Grid.Column="0" Grid.Row="8" WidthRequest="100" HorizontalOptions="Start"/>-->
-
-
-                    <Label x:Name="SummaryLabel" Text="{Binding Summary}" Grid.Column="0" Grid.Row="9"/>
-                </Grid>
-
-                <CollectionView x:Name="szar" Grid.Column="1" Grid.Row="0" BackgroundColor="Purple" BindingContext="{Binding Source = {local:DataModel}}" ItemsSource="{Binding Cars}">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <HorizontalStackLayout>
-                                <Label Text="{Binding Name}" />
-                            </HorizontalStackLayout>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
+                <Label x:Name="SummaryLabel" Text="{Binding Summary}" Grid.Column="0" Grid.Row="9"/>
             </Grid>
-        </HorizontalStackLayout>
+
+            <CollectionView x:Name="RightCollection" Grid.Column="1" Grid.Row="0" BackgroundColor="Purple"  
+                            ItemsSource="{Binding Cars}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <HorizontalStackLayout>
+                            <Label Text="{Binding Name}" />
+                        </HorizontalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
     </ScrollView>
 
 </ContentPage>

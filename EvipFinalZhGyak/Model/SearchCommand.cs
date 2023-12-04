@@ -1,26 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using System.Windows.Input;
+using EvipFinalZhGyak.ViewModel;
 
-namespace EvipFinalZhGyak
+namespace EvipFinalZhGyak.Model
 {
     public class SearchCommand : ICommand
     {
-        private DataModel dataModel;
+        private readonly DataModel dataModel;
 
         public SearchCommand(DataModel dataModel)
         {
             this.dataModel = dataModel;
+            this.dataModel.PropertyChanged += (sender, args) =>
+            {
+                this.CanExecuteChanged?.Invoke(this, new System.EventArgs());
+            };
         }
 
         public event EventHandler CanExecuteChanged;
 
         public bool CanExecute(object parameter)
         {
-            if (dataModel.Brand == "" || dataModel.SelectedType == "")
+            if (dataModel.Brand == "" || dataModel.Brand == null || dataModel.SelectedType == "" || dataModel.SelectedType == null)
             {
                 return false;
             }
@@ -31,7 +31,7 @@ namespace EvipFinalZhGyak
         {
             if (CanExecute(parameter))
             {
-            dataModel.Search();
+                await Task.Run(() => dataModel.Search());
             }
         }
     }
