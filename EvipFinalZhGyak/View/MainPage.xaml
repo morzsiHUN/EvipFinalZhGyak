@@ -4,7 +4,7 @@
              x:Class="EvipFinalZhGyak.MainPage"
              BackgroundColor="#222222"
              x:Name="thisMain"
-             Title="Evip Zárthelyi gyakorlás"
+             Title="ZH2B"
              xmlns:local="clr-namespace:EvipFinalZhGyak"
              xmlns:vm="clr-namespace:EvipFinalZhGyak.ViewModel"
              xmlns:md="clr-namespace:EvipFinalZhGyak.Model">
@@ -69,7 +69,7 @@
                 <Label x:Name="SummaryLabel" Text="{Binding Summary}" Grid.Column="0" Grid.Row="9"/>
             </Grid>
 
-            <CollectionView x:Name="RightCollection" Grid.Column="1" Grid.Row="0" BackgroundColor="Purple"  
+            <CollectionView x:Name="RightCollection" Grid.Column="1" Grid.Row="0" 
                             ItemsSource="{Binding Cars}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
